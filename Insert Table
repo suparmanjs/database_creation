@@ -1,0 +1,152 @@
+--Welcome to my portfolio!
+
+--Let's assumed I worked as a entry data analyst in online retail company and the employer asked me to update their database.
+--In the previous part we alredy created the tables. In this part we are going to fill or update the tables.
+
+
+INSERT INTO "Users" (userId, name, phoneNumber)
+VALUES 
+	  ('PH01','Evan Rodriquez','0836-2163-3333'),
+	  ('XI55','Logan Ball','0888-1192-2386'),
+	  ('SC21','Allegra Hodge','0855-6234-1827'),
+	  ('OM02','Yael Lamb','0839-7484-7934'),
+	  ('QX22','Quamar Hubbard','0837-9094-5602'),
+	  ('WX43','Kaseem Gallagher','0885-5451-4775'),
+	  ('YF03','Dacey Walker','0804-9836-7312'),
+	  ('HG84','Sonia Bright','0812-8529-7231'),
+	  ('YJ91','Randall Cash','0895-6753-1326'),
+	  ('JN58','Paula Wilkins','0875-2787-5401');
+
+
+INSERT INTO "Buyer" (userId)
+VALUES
+	('PH01'),
+	('XI55'),
+	('SC21'),
+	('OM02'),
+	('QX22');
+
+INSERT INTO "Seller" (userId)
+VALUES
+	('WX43'),
+	('YF03'),
+	('HG84'),
+	('YJ91'),
+	('JN58');
+
+INSERT INTO "BankCard" (cardNumber,expiryDate,bank)
+VALUES
+	  ('4175 0032 4576 3878','26-02-24','CIMB Niaga'),
+	  ('3767 2693 6756 6333','12-01-24','BCA'),
+	  ('4313 8339 6218 6876','29-12-23','BNI'),
+	  ('3765 339486 71838','15-09-22','BRI'),
+	  ('3739 484133 45580','13-08-23','PERMATA'),
+	  ('4026 3841 3411 9559','24-08-23','SinarMas'),
+	  ('6487 8624 5395 9483','25-12-23','CIMB Niaga'),
+	  ('4913 4627 3399 8254','26-05-24','Mandiri'),
+	  ('5459 7745 9915 4560','20-08-22','BCA'),
+	  ('4916 8333 7987 2267','01-11-23','BTPN');
+
+INSERT INTO "CreditCard" (cardNumber,userId,organization)
+VALUES
+	('4175 0032 4576 3878','YF03','Visa'),
+	('4916 8333 7987 2267','YJ91','Master'),
+	('4913 4627 3399 8254','QX22','Visa'),
+	('3767 2693 6756 6333','SC21','Master'),
+	('5459 7745 9915 4560','PH01','Master');
+
+INSERT INTO "DebitCard" (cardNumber,userId)
+VALUES
+	('3739 484133 45580','WX43'),
+	('3765 339486 71838','HG84'),
+	('4026 3841 3411 9559','JN58'),
+	('6487 8624 5395 9483','OM02'),
+	('4313 8339 6218 6876','XI55');
+
+INSERT INTO "Stores" (storeId,name,province,city,streetAddr,customerGrade,startTime)
+VALUES
+	('75TV','Bali','Denpasar','6705 Cursus Street',4,'05-31-24'),
+	('78BO','South Sumatra','Palembang','Ap #458-6562 At Av.',5,'11-21-22'),
+	('40NJ','South Sumatra','Palembang','Ap #621-1094 Consequat Ave',3,'01-20-23'),
+	('56HM','Bali','Denpasar','P.O. Box 885, 2775 Mauris, Rd.',4,'02-09-24'),
+	('40IB','South Sumatra','Palembang','929-9346 Lobortis Ave',2,'06-15-23'),
+	('78FV','South Kalimantan','Banjarmasin','Ap #401-2423 Tincidunt St.',4,'06-21-22'),
+	('80YS','Papua','Jayapura','271-403 Facilisi. Av.',1,'03-07-23'),
+	('34NE','South Sulawesi','Palopo','Ap #371-1511 Ipsum Street',2,'08-23-22'),
+	('30FI','West Java','Bekasi','235-3393 Accumsan Road',2,'01-01-24'),
+	('27XZ','South Kalimantan','Banjarmasin','625-8727 Nunc Ave',1,'09-01-23');
+
+INSERT INTO "Brand" (brandName)
+VALUES
+	('Asus'),
+	('Acer'),
+	('Lenovo'),
+	('Apple'),
+	('Samsung'),
+	('Del'),
+	('Microsoft'),
+	('Canon');
+
+INSERT INTO	"Product" (productId,storeId,brandName,productName,productType,modelNumber,quantity)
+VALUES
+	(1,'75TV','Asus','ASUS Chromebook 11.6 laptop','laptop','C201PA-DS02',262),
+	(2,'78BO','Canon','Canon EOS Rebel T5','cameras','9126B003',500),
+	(3,'40NJ','DELL','DELL Ultra HD 4k Monitor P2715Q 27-Inch Screen LED-Lit Monitor','computer accessories','P2715Q',713),
+	(4,'27XZ','Microsoft','Microsoft Xbox 360 Wired Controller for Windows','controllers','52A-00004',35),
+	(5,'30FI','Microsoft','Microsoft Surface Pro 4 i5 (128GB) with Wireless Media Adapter','laptop','CR5-00001',1350);
+
+INSERT INTO "OrderItem" (itemId,productId,price,creationTime)
+VALUES
+	('B43',1,6995.08,'01-26-24'),
+	('W22',2,6922.15,'07-28-22'),
+	('D33',3,8969.31,'09-26-22'),
+	('O29',4,1478.53,'06-20-22'),
+	('L49',5,8543.15,'03-31-22');
+
+INSERT INTO Orders (orderId,paymentStatus,creationTime,totalAmount)
+VALUES
+	('7864','Unpaid','01-14-23',9),
+	('2762','Unpaid','12-04-22',7),
+	('9250','Paid','09-10-22',7),
+	('6786','Paid','09-28-22',6),
+	('9516','Paid','12-12-23',6);
+
+INSERT INTO Address (userid,name,contactNumber,province,city,streetAddr,postCode)
+VALUES
+	('PH01','Evan Rodriquez','0836-2163-3333','Special Capital Region of Jakarta','Jakarta','P.O. Box 282, 5385 Iaculis Av.','96538'),
+	('XI55','Logan Ball','0888-1192-2386','Special Capital Region of Jakarta','Central Jakarta','Ap #756-4840 Vitae, Rd.','68577'),
+	('SC21','Allegra Hodge','0855-6234-1827','Central Java','Semarang','410-7084 Tempus Ave','69555'),
+	('YJ91','Randall Cash','0895-6753-1326','North Sulawesi','Manado','7996 Massa. St.','78014'),
+	('JN58','Paula Wilkins','0875-2787-5401','West Sulawesi','Mamuju','954-7296 In Ave','82472');
+
+INSERT INTO ServicePoint (servPointId,province,city,streetAddr,startTime,endTime)
+VALUES
+	('SP71','Bangka Belitung Islands','Pangkalpinang','1010 A Ave','64718'),
+	('SP86','North Sulawesi','Bitung','159-3855 Odio. St.','65574'),
+	('SP72','West Sulawesi','Mamuju','511-8639 Sapien Road','57645'),
+	('SP72','East Java','Blitar','220-1425 Et Street','51772'),
+	('SP54','North Kalimantan','Tarakan','Ap #602-9284 At Avenue','31587');
+
+INSERT INTO Save_to_shopping_chart (userId,productId,addTime,quantity)
+VALUES
+	('PH01',1,'07-11-22',1),
+	('XI55',3,'09-30-22',3),
+	('SC21',2,'03-26-23',2),
+	('OM02',5,'10-19-22',1),
+	('QX22',4,'01-04-23',2);	
+
+INSERT INTO Chart_contain (orderNumber,productId,quantity)
+VALUES
+	('7864',1,9),
+	('2762',3,7),
+	('9250',3,7),
+	('6786',5,6),
+	('9516',1,6);
+
+INSERT INTO Payment (orderNumber,creditcardNumber,payTime)
+VALUES
+	('8286','5324 2612 3852 3333','03-02-23'),
+	('9375','4532558573726142','04-06-23'),
+	('5128','524213 558242 3655','04-26-23'),
+	('3994','526758 419328 8876','04-12-23'),
+	('2838','455698 585452 1259','04-21-23');
