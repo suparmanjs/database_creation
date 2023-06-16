@@ -1,0 +1,181 @@
+--Welcome to my portfolio!
+
+--Let's assumed I worked as a entry data analyst in online retail company and the employer asked me to update their database.
+--They asked to create several table to accomodate their data which is necessarily include:
+
+--User 
+--Buyer
+--Seller
+--Bank Card
+--Credit Card
+--Debit Card
+--Store
+--Product
+--Order
+--Order Item
+--Address
+--Using those necessary table, they also asked to include sensitive data to be put inside those tables.
+
+
+--Lets create the tables:
+
+-- First, We need to decide the database that we want to use in this case its called "DA"
+USE DA;
+
+CREATE TABLE Users
+(
+	userId INT NOT NULL
+	,name VARCHAR (20)
+	,phoneNumber VARCHAR (20)
+	,PRIMARY KEY (userId)
+);
+
+CREATE TABLE Buyer
+(
+	userId INT NOT NULL
+	,PRIMARY KEY (userId)
+	,FOREIGN KEY (userId) REFERENCES Users(userId)
+);
+
+CREATE TABLE Seller
+(
+	userId INT NOT NULL
+	,PRIMARY KEY (userId)
+	,FOREIGN KEY (userId) REFERENCES Users(userId)
+);
+
+CREATE TABLE BankCard
+(
+	cardNumber VARCHAR(25) NOT NULL
+	,expiryDate DATE
+	,bank VARCHAR(20)
+	,PRIMARY KEY (cardNumber)
+);
+
+CREATE TABLE CreditCard
+(
+	cardNumber VARCHAR(25) NOT NULL
+	,userId INT
+	,organization VARCHAR(25)
+	,PRIMARY KEY (cardNumber)
+	,FOREIGN KEY (cardNumber) REFERENCES BankCard(cardNumber)
+	,FOREIGN KEY (userId) REFERENCES Users(userId)
+);
+
+CREATE TABLE DebitCard
+(
+	cardNumber VARCHAR (25) NOT NULL
+	,userId INT
+	,PRIMARY KEY (cardNumber)
+	,FOREIGN KEY (cardNumber) REFERENCES BankCard(cardNumber)
+	,FOREIGN KEY (userId) REFERENCES Users(userId)
+);
+
+CREATE TABLE Stores
+(
+	storeId INT NOT NULL
+	,name VARCHAR(20)
+	,provice VARCHAR(20)
+	,city VARCHAR(20)
+	,streetAdrr VARCHAR(20)
+	,customerGrade INT
+	,startTime DATE
+	PRIMARY KEY (storeId)
+);
+
+CREATE TABLE Brand
+(
+	brandName VARCHAR(20) NOT NULL
+	,PRIMARY KEY (brandName)
+
+);
+
+CREATE TABLE Product
+(
+	productId INT NOT NULL
+	,storeId INT
+	,brandName VARCHAR(20)
+	,productName VARCHAR(20)
+	,productType VARCHAR(20)
+	,modelNumber VARCHAR(20)
+	,color VARCHAR(20)
+	,quantity INT
+	,PRIMARY KEY (productId)
+	,FOREIGN KEY (storeId) REFERENCES Stores(storeId)
+	,FOREIGN KEY (brandName) REFERENCES Brand(brandName)
+);
+
+CREATE TABLE OrderItem
+(
+	itemId INT NOT NULL
+	,productId INT
+	,price INT
+	,creationTime DATETIME
+	,PRIMARY KEY (itemId)
+	,FOREIGN KEY (productId) REFERENCES Product(productId)
+);
+
+CREATE TABLE Orders
+(
+	orderNumber INT NOT NULL
+	,paymentStatus VARCHAR(20)
+	,creationTime DATETIME
+	,totalAmount INT
+	,PRIMARY KEY (orderId)
+);
+
+CREATE TABLE Address
+(
+	userid INT NOT NULL
+	,name VARCHAR(20)
+	,contactNumber VARCHAR(20)
+	,province VARCHAR(20)
+	,city VARCHAR(20)
+	,streetAddr VARCHAR(20)
+	,postCode VARCHAR(20)
+	,PRIMARY KEY (userId)
+);
+
+CREATE TABLE ServicePoint
+(
+	servPointId INT NOT NULL
+	,province VARCHAR(20)
+	,city VARCHAR(20)
+	,streetAddr VARCHAR(20)
+	,startTime DATE
+	,endTime DATE
+	,PRIMARY KEY (servPointId)
+);
+
+-- Relationship
+
+CREATE TABLE Save_to_shopping_chart
+(
+	userId INT NOT NULL
+	,productId INT
+	,addTime DATETIME
+	,quantity INT
+	,PRIMARY KEY (userId, productId)
+	,FOREIGN KEY (userId) REFERENCES Buyer(userId)
+	,FOREIGN KEY productId REFERENCES Product(productId)
+);
+
+CREATE TABLE Chart_contain
+(
+	orderNumber INT NOT NULL
+	,productId INT
+	,quantity INT
+	,PRIMARY KEY (orderNumber, itemId)
+	,FOREIGN KEY (orderNumber) REFERENCES orders(orderId)
+	,FOREIGN KEY (productId) REFERENCES Product(productId)
+);
+
+CREATE TIME Payment
+(
+	orderNumber INT NOT NULL
+	,creditcardNumber VARCHAR(20)
+	,payTime DATETIME
+	,PRIMARY KEY (orderNumber, creditCardNumber)
+	,FOREIGN KEY (orderNumber) REFERENCES Orders(orderId)
+	,FOREIGN KEY (creditcardNumber) REFERENCES CreditCard(cardNumber)
+);
